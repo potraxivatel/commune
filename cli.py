@@ -142,7 +142,7 @@ def is_easter_egg_active() -> bool:
     return (today.month == 4 and today.day == 1) or ("--comrade" in sys.argv)
 
 
-def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool):
+def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has_coder: bool = False):
     easter_egg = is_easter_egg_active()
     title = Text()
 
@@ -161,13 +161,15 @@ def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool):
     status_line.append(f"• Collective Archive: {store.count} memory records loaded\n", style="green")
     
     workers = []
+    if has_coder:
+        workers.append("Qwen 2.5 Coder (Swarm Brain)")
     if has_writer:
         workers.append("Memory Writer")
     if has_compressor:
         workers.append("Stage 2 Compressor")
     
     if workers:
-        status_line.append(f"• Custom Workers: {', '.join(workers)} (GGUF) [READY]\n", style="bold green")
+        status_line.append(f"• Neural Workers: {', '.join(workers)} (GGUF) [ONLINE]\n", style="bold green")
     else:
         status_line.append("• Workers: Mock components [READY]\n", style="yellow")
     status_line.append("Type your task, or /help for available commands.", style="italic white")
@@ -256,17 +258,37 @@ async def main():
     engine.register(cmd_tool)
     engine.register(pipeline_tool)
 
-    # 1c. Register Autonomous Agent Loop
+    # 1c. Load Stock Coder Model if available
+    stock_coder_path = base_dir / "llms" / "stock" / "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf"
+    has_coder = stock_coder_path.exists()
+    coder_llm = None
+
+    if has_coder:
+        coder_llm = LlamaComponent(
+            name="qwen-coder",
+            model_path=stock_coder_path,
+            system_prompt=(
+                "Ты опытный Python разработчик и архитектор в системе Commune AI. "
+                "Ты пишешь качественный, полностью рабочий код и кратко, по делу общаешься на русском языке."
+            ),
+            n_ctx=2048,
+            temperature=0.2,
+            max_tokens=512,
+        )
+        await coder_llm.load()
+        engine.register(coder_llm)
+
+    # 1d. Register Autonomous Agent Loop
     agent_loop = AgentLoop(
         tools=[read_tool, write_tool, list_tool, cmd_tool],
-        llm=None,
+        llm=coder_llm,
         compressor=CompressorComponent(),
         memory_store=store,
     )
     engine.register(agent_loop)
 
-    # 1d. Register Swarm Council of Agents
-    swarm_team = SwarmTeam(memory_store=store)
+    # 1e. Register Swarm Council of Agents with Neural Brain
+    swarm_team = SwarmTeam(memory_store=store, llm=coder_llm)
     engine.register(swarm_team)
 
     # 2. Register Custom Models if available
@@ -354,7 +376,7 @@ async def main():
 
     engine.set_default_route([PlanStep(component="parser")])
 
-    print_banner(store, has_writer, has_compressor)
+    print_banner(store, has_writer, has_compressor, has_coder=has_coder)
 
     # Prompt session with command history
     history_file = base_dir / ".commune_history"
@@ -478,7 +500,7 @@ async def main():
                 continue
             elif user_input == "/clear":
                 console.clear()
-                print_banner(store, has_writer, has_compressor)
+                print_banner(store, has_writer, has_compressor, has_coder=has_coder)
                 continue
 
             # Run Task through Commune Multi-Agent Swarm Council

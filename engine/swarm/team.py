@@ -50,6 +50,7 @@ class SwarmTeam(Component):
         self,
         name: str = "swarm_team",
         memory_store: MemoryStore | None = None,
+        llm: Component | None = None,
         planner: PlannerMember | None = None,
         coder: CoderMember | None = None,
         reviewer: ReviewerMember | None = None,
@@ -57,8 +58,9 @@ class SwarmTeam(Component):
         super().__init__()
         self._name = name
         self._store = memory_store
-        self._planner = planner or PlannerMember()
-        self._coder = coder or CoderMember()
+        self._llm = llm
+        self._planner = planner or PlannerMember(llm=llm)
+        self._coder = coder or CoderMember(llm=llm)
         self._reviewer = reviewer or ReviewerMember()
 
     def manifest(self) -> ComponentManifest:
