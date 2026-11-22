@@ -17,6 +17,7 @@ if venv_python.exists() and sys.executable != str(venv_python):
     os.execv(str(venv_python), [str(venv_python)] + sys.argv)
 
 import asyncio
+import datetime
 import json
 import logging
 import time
@@ -131,23 +132,38 @@ class MemoryWriterComponent(Component):
             )
 
 
+def is_easter_egg_active() -> bool:
+    """Active on April 1st or if --comrade flag is passed."""
+    today = datetime.date.today()
+    return (today.month == 4 and today.day == 1) or ("--comrade" in sys.argv)
+
+
 def print_banner(store: MemoryStore, has_custom_model: bool):
+    easter_egg = is_easter_egg_active()
     title = Text()
-    title.append("☭ COMMUNE AI ", style="bold red")
-    title.append("— Cooperative Staged AI Engine\n", style="bold white")
-    title.append("Version: 0.2.0 | Engine: Python + llama.cpp | Architecture: Collective Intelligence\n", style="dim")
+
+    if easter_egg:
+        title.append("☭ COMMUNE AI ", style="bold red")
+        title.append("— Cooperative Staged AI Engine\n", style="bold white")
+        title.append("Version: 0.2.0 | Engine: Python + llama.cpp | Architecture: Collective Intelligence\n", style="dim")
+        border = "red"
+    else:
+        title.append("◈ COMMUNE AI ", style="bold cyan")
+        title.append("— Decentralized Cooperative AI Engine\n", style="bold white")
+        title.append("Version: 0.2.0 | Engine: Python + llama.cpp | Architecture: Swarm Intelligence\n", style="dim")
+        border = "cyan"
 
     status_line = Text()
     status_line.append(f"• Collective Archive: {store.count} memory records loaded\n", style="green")
     if has_custom_model:
-        status_line.append("• Custom Worker: Qwen 2.5 0.5B GGUF (Memory Writer) [ACTIVE]\n", style="bold green")
+        status_line.append("• Active Worker: Qwen 2.5 0.5B GGUF (Memory Writer) [READY]\n", style="bold green")
     else:
-        status_line.append("• Custom Worker: Not loaded (using mock components)\n", style="yellow")
+        status_line.append("• Active Worker: Mock components [READY]\n", style="yellow")
     status_line.append("Type your task, or /help for available commands.", style="italic white")
 
     panel = Panel(
         title + "\n" + status_line,
-        border_style="red",
+        border_style=border,
         padding=(1, 2),
     )
     console.print(panel)
@@ -274,7 +290,8 @@ async def main():
 
             # Command Handling
             if user_input in ["/exit", "exit", "quit", ":q", "q"]:
-                console.print("[red]Shutting down Commune Engine. Goodbye, comrade![/]")
+                farewell = "Goodbye, comrade! ☭" if is_easter_egg_active() else "Shutting down Commune Engine. Goodbye!"
+                console.print(f"[cyan]{farewell}[/]")
                 break
             elif user_input == "/help":
                 console.print(Panel(
