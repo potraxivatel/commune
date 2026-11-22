@@ -63,6 +63,22 @@ async def test_swarm_team_general_discussion(tmp_path: Path):
     turn = await team.chat("Объясни, как работает конвейер в двух словах")
 
     # General questions are routed to direct architect answer without dragging Coder/Reviewer
-    assert len(turn.internal_discussion) >= 1
+    assert len(turn.internal_discussion) == 1
+    assert turn.internal_discussion[0].sender == "planner"
     assert turn.final_answer.recipient == "user"
     assert len(turn.final_answer.content) > 0
+
+
+@pytest.mark.asyncio
+async def test_swarm_team_selective_review(tmp_path: Path):
+    test_file = tmp_path / "valid.py"
+    test_file.write_text("print('hello')\n")
+    team = SwarmTeam(memory_store=None)
+    turn = await team.chat(f"Проверь и протестируй {test_file}")
+
+    # Selective invocation: Planner + Reviewer (Coder is not called)
+    senders = [m.sender for m in turn.internal_discussion]
+    assert "planner" in senders
+    assert "reviewer" in senders
+    assert "coder" not in senders
+    assert turn.final_answer.recipient == "user"

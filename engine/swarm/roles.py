@@ -118,7 +118,11 @@ class PlannerMember(SwarmMember):
                 ans = ""
 
         if not ans:
-            ans = f"Commune AI — это децентрализованный оркестратор. Мы храним факты в легких JSON-файлах в папке memory/, а не в тяжелой базе данных."
+            # If query looks like disconnected words or unclear intent
+            if len(user_query.split()) < 6 and not any(ch in user_query.lower() for ch in ("?", "как", "что", "где", "зачем", "почему", "кто")):
+                ans = f"Получил: «{user_query}». Чем помочь по этой теме? Могу написать скрипт, автоматизировать или ответить на вопрос."
+            else:
+                ans = f"Commune AI — это децентрализованный оркестратор. Я готов решить задачу — уточни, что именно нужно сделать."
 
         return SwarmMessage(
             sender=self._name,
