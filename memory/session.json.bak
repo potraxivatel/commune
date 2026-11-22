@@ -17,5 +17,89 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "056ba45f251a",
+    "category": "session",
+    "key": "agent_task_1795356616",
+    "content": {
+      "task": "создай файл /tmp/commune_test.txt с текстом Работает отлично!",
+      "steps_count": 1,
+      "final_answer": "Tool 'write_file' executed successfully:\n{'path': '/tmp/commune_test.txt', 'bytes_written': 32, 'append': False, 'success': True}"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356616.902914,
+      "updated_at": 1795356616.9029143,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "7d0458f899ff",
+    "category": "session",
+    "key": "agent_task_1795356767",
+    "content": {
+      "task": "/agent",
+      "steps_count": 0,
+      "final_answer": "Task completed: /agent"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356767.079373,
+      "updated_at": 1795356767.0793736,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "66e2dc28aafd",
+    "category": "session",
+    "key": "agent_task_1795356780",
+    "content": {
+      "task": "/agent создай файл hello_commune.py с текстом print(\"Привет, Коммуна!\")",
+      "steps_count": 1,
+      "final_answer": "Tool 'write_file' executed successfully:\n{'path': '/home/void/Projects/Pyramid/hello_commune.py', 'bytes_written': 38, 'append': False, 'success': True}"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356780.024245,
+      "updated_at": 1795356780.0242457,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "da9151d6a987",
+    "category": "session",
+    "key": "agent_task_1795356787",
+    "content": {
+      "task": "создай файл hello_commune.py с текстом print(\"Привет, Коммуна!\")",
+      "steps_count": 1,
+      "final_answer": "Tool 'write_file' executed successfully:\n{'path': '/home/void/Projects/Pyramid/hello_commune.py', 'bytes_written': 38, 'append': False, 'success': True}"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356787.4173403,
+      "updated_at": 1795356787.417341,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
   }
 ]

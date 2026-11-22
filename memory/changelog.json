@@ -1,10 +1,10 @@
 [
   {
-    "timestamp": 1795356616.9029403,
+    "timestamp": 1795357072.8084888,
     "action": "add",
-    "record_id": "056ba45f251a",
-    "key": "agent_task_1795356616",
-    "source": "agent_loop",
+    "record_id": "0d289b972d87",
+    "key": "swarm_chat_1795357072",
+    "source": "swarm_team",
     "old_version": null,
     "new_version": 1,
     "details": ""

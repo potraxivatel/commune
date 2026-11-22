@@ -38,5 +38,90 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "7d0458f899ff",
+    "category": "session",
+    "key": "agent_task_1795356767",
+    "content": {
+      "task": "/agent",
+      "steps_count": 0,
+      "final_answer": "Task completed: /agent"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356767.079373,
+      "updated_at": 1795356767.0793736,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "66e2dc28aafd",
+    "category": "session",
+    "key": "agent_task_1795356780",
+    "content": {
+      "task": "/agent создай файл hello_commune.py с текстом print(\"Привет, Коммуна!\")",
+      "steps_count": 1,
+      "final_answer": "Tool 'write_file' executed successfully:\n{'path': '/home/void/Projects/Pyramid/hello_commune.py', 'bytes_written': 38, 'append': False, 'success': True}"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356780.024245,
+      "updated_at": 1795356780.0242457,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "da9151d6a987",
+    "category": "session",
+    "key": "agent_task_1795356787",
+    "content": {
+      "task": "создай файл hello_commune.py с текстом print(\"Привет, Коммуна!\")",
+      "steps_count": 1,
+      "final_answer": "Tool 'write_file' executed successfully:\n{'path': '/home/void/Projects/Pyramid/hello_commune.py', 'bytes_written': 38, 'append': False, 'success': True}"
+    },
+    "tags": [
+      "agent_action"
+    ],
+    "provenance": {
+      "source": "agent_loop",
+      "created_at": 1795356787.4173403,
+      "updated_at": 1795356787.417341,
+      "component": "agent_loop"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "0d289b972d87",
+    "category": "session",
+    "key": "swarm_chat_1795357072",
+    "content": {
+      "user": "Создай скрипт snake_game.py с базовой логикой змейки",
+      "internal_steps": 3,
+      "final_answer": "Всё готово по запросу: «Создай скрипт snake_game.py с базовой логикой змейки»!\n\n**Что сделала команда:**\n• 💻 Инженер: Написал код и сохранил в файл `snake_game.py` (193 байт).\n• 🔍 Тестировщик: Проверил синтаксис `snake_game.py` через компилятор — ошибок нет, код валиден! ✓\n\nЕсли нужно что-то дополнить или протестировать — скажи!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795357072.8084671,
+      "updated_at": 1795357072.8084674,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
   }
 ]

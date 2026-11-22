@@ -40,6 +40,7 @@ from engine.inference.llama_backend import LlamaComponent
 from engine.memory.records import MemoryCategory, MemoryUpdate
 from engine.memory.store import MemoryStore
 from engine.router.router import PlanStep
+from engine.swarm import SwarmTeam
 from engine.tools import CompressorComponent, ListDirComponent, ReadFileComponent, RunCommandComponent, WriteFileComponent
 from engine.workflows import CodebasePipeline
 from tests.mock_components import EchoComponent, UpperComponent, WordCountComponent
@@ -264,6 +265,10 @@ async def main():
     )
     engine.register(agent_loop)
 
+    # 1d. Register Swarm Council of Agents
+    swarm_team = SwarmTeam(memory_store=store)
+    engine.register(swarm_team)
+
     # 2. Register Custom Models if available
     custom_writer_path = base_dir / "llms" / "custom" / "pyramid_memory_writer.Q4_K_M.gguf"
     custom_compressor_path = base_dir / "llms" / "custom" / "commune_compressor.Q4_K_M.gguf"
@@ -476,40 +481,30 @@ async def main():
                 print_banner(store, has_writer, has_compressor)
                 continue
 
-            # Run Task through Commune Engine
-            with console.status("[bold cyan]Executing through Commune stages...", spinner="dots"):
-                t0 = time.time()
-                result = await engine.run(user_input)
-                total_time = (time.time() - t0) * 1000
+            # Run Task through Commune Multi-Agent Swarm Council
+            with console.status("[bold cyan]Council of Agents in session (Planner → Coder → Reviewer)...", spinner="dots"):
+                turn = await swarm_team.chat(user_input)
 
-            # 1. Print Execution Traces
-            traces_table = Table(box=None, padding=(0, 2), show_header=False)
-            for trace in result.execution.traces:
-                icon = "[bold green]✓[/]" if trace.status == "ok" else "[bold red]✗[/]"
-                traces_table.add_row(
-                    icon,
-                    f"[bold cyan]{trace.component}[/]",
-                    f"[dim]{trace.status}[/]",
-                    f"[yellow]{trace.latency_ms:.1f}ms[/]",
-                    f"[dim]{trace.output_size} chars[/]",
+            # 1. Internal Agent Deliberation
+            disc_table = Table(box=None, padding=(0, 2), show_header=False)
+            for m in turn.internal_discussion:
+                disc_table.add_row(
+                    f"{m.avatar} [bold]{m.role_title}[/]",
+                    f"[dim]{m.content}[/]",
                 )
 
             console.print(Panel(
-                traces_table,
-                title=f"Plan: {' → '.join(s.component for s in result.plan.steps)} (Total: {total_time:.1f}ms)",
+                disc_table,
+                title=f"Internal Swarm Deliberation ({turn.duration_ms:.1f}ms)",
                 border_style="dim cyan",
             ))
 
-            # 2. Print Output
-            out_content = result.output
-            if isinstance(out_content, dict) or (isinstance(out_content, str) and out_content.startswith("{")):
-                try:
-                    formatted_json = json.dumps(json.loads(out_content) if isinstance(out_content, str) else out_content, indent=2, ensure_ascii=False)
-                    console.print(Panel(formatted_json, title="Output (JSON)", border_style="green"))
-                except Exception:
-                    console.print(Panel(str(out_content), title="Output", border_style="green"))
-            else:
-                console.print(Panel(str(out_content), title="Output", border_style="green"))
+            # 2. Final User Answer
+            console.print(Panel(
+                turn.final_answer.content,
+                title=f"{turn.final_answer.avatar} {turn.final_answer.role_title}",
+                border_style="green",
+            ))
 
         except (KeyboardInterrupt, EOFError):
             console.print("\n[cyan]Exiting...[/]")

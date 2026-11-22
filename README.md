@@ -10,7 +10,7 @@
 [![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Инференс: llama.cpp](https://img.shields.io/badge/инференс-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Статус: v0.2.0 Alpha](https://img.shields.io/badge/статус-v0.2.0%20alpha-brightgreen.svg)]()
-[![Тесты: 58 пройдено](https://img.shields.io/badge/тесты-58%20пройдено-success.svg)]()
+[![Тесты: 61 пройдено](https://img.shields.io/badge/тесты-61%20пройдено-success.svg)]()
 
 [Архитектура](#архитектура) •
 [Центральная гипотеза](#центральная-гипотеза) •
@@ -132,7 +132,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-Все 58 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти, системные инструменты, агентный цикл) выполняются локально без обращений к сети и без обязательного наличия GPU.
+Все 61 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти, системные инструменты, агентный цикл, swarm) выполняются локально без обращений к сети и без обязательного наличия GPU.
 
 ---
 
@@ -172,6 +172,7 @@ commune/
 │   ├── scheduler/
 │   │   └── scheduler.py      # Планировщик топологического параллельного запуска
 │   ├── agent/                # Автономный агентный цикл (AgentLoop) и схемы тулзов
+│   ├── swarm/                # Совет агентов (Planner, Coder, Reviewer)
 │   ├── tools/                # Детерминированные инструменты (чтение, запись, bash, компрессия)
 │   └── workflows/            # Ступенчатые пайплайны (CodebasePipeline)
 ├── llms/
@@ -214,6 +215,7 @@ commune/
 - [x] **Фаза 4: Автономный агентный цикл и протоколы инструментов**
   - [x] Стандартная схема вызова инструментов (JSON-schema / OpenAI compatible)
   - [x] Автономный цикл принятия решений (`AgentLoop`) с защитой от зацикливания
+  - [x] Совет агентов (Swarm Council: Planner, Coder, Reviewer) с внутренним обсуждением
   - [ ] Поддержка Model Context Protocol (MCP) клиент/сервер
 - [ ] **Фаза 5: Эмпирические бенчмарки**
   - [ ] Замеры задержки, VRAM и качества в сравнении с 7B/14B монолитами
@@ -243,7 +245,7 @@ commune/
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Inference: llama.cpp](https://img.shields.io/badge/inference-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Status: v0.2.0 Alpha](https://img.shields.io/badge/status-v0.2.0%20alpha-brightgreen.svg)]()
-[![Tests: 58 passed](https://img.shields.io/badge/tests-58%20passed-success.svg)]()
+[![Tests: 61 passed](https://img.shields.io/badge/tests-61%20passed-success.svg)]()
 
 [Architecture](#architecture) •
 [Core Hypothesis](#core-hypothesis) •
@@ -365,7 +367,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-All 58 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore, deterministic tools, agent loop) run hermetically without external network calls or GPU requirements.
+All 61 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore, deterministic tools, agent loop, swarm) run hermetically without external network calls or GPU requirements.
 
 ---
 
@@ -405,6 +407,7 @@ commune/
 │   ├── scheduler/
 │   │   └── scheduler.py      # Topological DAG runner with parallel execution
 │   ├── agent/                # Autonomous AgentLoop & tool calling schemas
+│   ├── swarm/                # Multi-agent council (Planner, Coder, Reviewer)
 │   ├── tools/                # Deterministic tools (read, write, list, run_command, compressor)
 │   └── workflows/            # Staged execution workflows (CodebasePipeline)
 ├── llms/
@@ -447,6 +450,7 @@ commune/
 - [x] **Phase 4: Autonomous Agent Loop & Tool Protocols**
   - [x] Standard tool-calling schemas (JSON-schema / OpenAI compatible)
   - [x] Autonomous multi-step decision loop (`AgentLoop`) with cycle protection
+  - [x] Multi-agent swarm council (Planner, Coder, Reviewer) with internal deliberation
   - [ ] Model Context Protocol (MCP) client/server integration
 - [ ] **Phase 5: Empirical Benchmark vs. Monolithic Baselines**
   - [ ] Latency, VRAM, and accuracy evaluation against 7B/14B single-model baselines
