@@ -805,5 +805,93 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "88f1e2bf5266",
+    "category": "session",
+    "key": "swarm_chat_1795358954",
+    "content": {
+      "user": "покукарекай",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я могу покукарекать."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358954.6733487,
+      "updated_at": 1795358954.6733491,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "352fa98ebfa3",
+    "category": "session",
+    "key": "swarm_chat_1795358959",
+    "content": {
+      "user": "ну давай",
+      "internal_steps": 1,
+      "final_answer": "Конечно, давай!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358959.7980926,
+      "updated_at": 1795358959.798093,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "30ced0922f43",
+    "category": "session",
+    "key": "swarm_chat_1795358963",
+    "content": {
+      "user": "ты чмо",
+      "internal_steps": 1,
+      "final_answer": "Я Архитектор системы Commune AI."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358963.5249543,
+      "updated_at": 1795358963.5249548,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "76902f54fc9f",
+    "category": "session",
+    "key": "swarm_chat_1795358967",
+    "content": {
+      "user": "нет",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я готов помочь. Чем могу вам помочь?"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358967.8984842,
+      "updated_at": 1795358967.8984845,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
   }
 ]
