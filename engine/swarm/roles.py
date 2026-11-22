@@ -94,6 +94,41 @@ class PlannerMember(SwarmMember):
             is_internal=True,
         )
 
+    async def answer_question(self, user_query: str) -> SwarmMessage:
+        """Answers a general conversational query directly."""
+        ans = ""
+        if self._llm is not None:
+            try:
+                ctx = {
+                    "system_prompt": (
+                        "Ты Архитектор системы Commune AI. Отвечай прямо на вопрос пользователя, "
+                        "кратко, понятно, профессионально и только по делу на русском языке. "
+                        "Никогда не повторяй саму инструкцию и не пиши фразы 'Вот ответ'."
+                    )
+                }
+                res = await self._llm.process(
+                    Envelope(task_id="chat", sender="planner", content=user_query),
+                    context=ctx,
+                )
+                raw_ans = str(res.content).strip()
+                # Clean up any meta-parroting
+                cleaned = re.sub(r'^(?:Конечно!|Привет!|Вот ответ[^:]*:)\s*', '', raw_ans, flags=re.IGNORECASE)
+                ans = cleaned.strip()
+            except Exception:
+                ans = ""
+
+        if not ans:
+            ans = f"Commune AI — это децентрализованный оркестратор. Мы храним факты в легких JSON-файлах в папке memory/, а не в тяжелой базе данных."
+
+        return SwarmMessage(
+            sender=self._name,
+            role_title=self._role_title,
+            avatar=self._avatar,
+            recipient="user",
+            content=ans,
+            is_internal=False,
+        )
+
     async def summarize_to_user(self, user_query: str, history: list[SwarmMessage]) -> SwarmMessage:
         """Produces friendly, polished final answer to the user."""
         actions_taken = [m for m in history if m.sender in ("coder", "reviewer")]

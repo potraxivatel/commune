@@ -40,6 +40,7 @@ class LlamaComponent(Component):
         n_gpu_layers: int = 0,
         temperature: float = 0.3,
         max_tokens: int = 1024,
+        repeat_penalty: float = 1.18,
         tags: list[str] | None = None,
         description: str = "",
     ) -> None:
@@ -51,6 +52,7 @@ class LlamaComponent(Component):
         self._n_gpu_layers = n_gpu_layers
         self._temperature = temperature
         self._max_tokens = max_tokens
+        self._repeat_penalty = repeat_penalty
         self._tags = tags or []
         self._description = description
         self._llm = None
@@ -102,9 +104,13 @@ class LlamaComponent(Component):
             raise RuntimeError(f"Model not loaded: {self._name}. Call load() first.")
 
         # Build messages
+        active_system = self._system_prompt
+        if context and "system_prompt" in context:
+            active_system = str(context["system_prompt"])
+
         messages = []
-        if self._system_prompt:
-            messages.append({"role": "system", "content": self._system_prompt})
+        if active_system:
+            messages.append({"role": "system", "content": active_system})
 
         # Inject context from prior steps if available
         if context and "prior_outputs" in context:
@@ -125,6 +131,7 @@ class LlamaComponent(Component):
             messages=messages,
             temperature=self._temperature,
             max_tokens=self._max_tokens,
+            repeat_penalty=self._repeat_penalty,
         )
         latency = (time.time() - t0) * 1000
 

@@ -162,7 +162,9 @@ def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has
     
     workers = []
     if has_coder:
-        workers.append("Qwen 2.5 Coder (Swarm Brain)")
+        coder_1_5b = base_dir / "llms" / "stock" / "qwen2.5-coder-1.5b-instruct-q4_k_m.gguf"
+        lbl = "Qwen 2.5 Coder 1.5B (Brain)" if coder_1_5b.exists() else "Qwen 2.5 Coder 0.5B (Brain)"
+        workers.append(lbl)
     if has_writer:
         workers.append("Memory Writer")
     if has_compressor:
@@ -258,12 +260,16 @@ async def main():
     engine.register(cmd_tool)
     engine.register(pipeline_tool)
 
-    # 1c. Load Stock Coder Model if available
-    stock_coder_path = base_dir / "llms" / "stock" / "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf"
+    # 1c. Load Stock Coder Model if available (prefer 1.5B if present, else 0.5B)
+    coder_1_5b = base_dir / "llms" / "stock" / "qwen2.5-coder-1.5b-instruct-q4_k_m.gguf"
+    coder_0_5b = base_dir / "llms" / "stock" / "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf"
+    stock_coder_path = coder_1_5b if coder_1_5b.exists() else coder_0_5b
+
     has_coder = stock_coder_path.exists()
     coder_llm = None
 
     if has_coder:
+        coder_name = "Qwen 2.5 Coder 1.5B" if stock_coder_path == coder_1_5b else "Qwen 2.5 Coder 0.5B"
         coder_llm = LlamaComponent(
             name="qwen-coder",
             model_path=stock_coder_path,
@@ -274,6 +280,7 @@ async def main():
             n_ctx=2048,
             temperature=0.2,
             max_tokens=512,
+            repeat_penalty=1.18,
         )
         await coder_llm.load()
         engine.register(coder_llm)

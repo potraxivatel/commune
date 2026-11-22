@@ -86,20 +86,44 @@ class SwarmTeam(Component):
         sid = session_id or f"session_{uuid.uuid4().hex[:8]}"
         internal_discussion: list[SwarmMessage] = []
 
-        # 1. Planner analyzes the query
-        plan_msg = await self._planner.plan_task(user_message)
-        internal_discussion.append(plan_msg)
+        q_lower = user_message.lower().strip()
+        is_coding_task = any(
+            w in q_lower
+            for w in (
+                "напиши", "создай", "сделай", "код", "скрипт", "файл", "функци",
+                "калькулятор", "змейк", "write", "create", "fix", "исправь", "запусти", "тест"
+            )
+        ) and not any(
+            q_lower.startswith(w) for w in ("зачем", "почему", "что такое", "кто", "как работает", "why", "what is")
+        )
 
-        # 2. Coder executes / creates code
-        code_msg, created_file = await self._coder.implement(user_message, plan_msg)
-        internal_discussion.append(code_msg)
+        if not is_coding_task:
+            # Direct conversational response from Architect
+            internal_discussion.append(
+                SwarmMessage(
+                    sender="planner",
+                    role_title="Архитектор",
+                    avatar="🧠",
+                    content="Вопрос не требует правок кода или создания файлов — отвечаю напрямую пользователю.",
+                    is_internal=True,
+                )
+            )
+            final_answer = await self._planner.answer_question(user_message)
+        else:
+            # 1. Planner analyzes the query
+            plan_msg = await self._planner.plan_task(user_message)
+            internal_discussion.append(plan_msg)
 
-        # 3. Reviewer verifies the code / test execution
-        review_msg = await self._reviewer.verify(created_file)
-        internal_discussion.append(review_msg)
+            # 2. Coder executes / creates code
+            code_msg, created_file = await self._coder.implement(user_message, plan_msg)
+            internal_discussion.append(code_msg)
 
-        # 4. Planner formats the final response for the user
-        final_answer = await self._planner.summarize_to_user(user_message, internal_discussion)
+            # 3. Reviewer verifies the code / test execution
+            review_msg = await self._reviewer.verify(created_file)
+            internal_discussion.append(review_msg)
+
+            # 4. Planner formats the final response for the user
+            final_answer = await self._planner.summarize_to_user(user_message, internal_discussion)
 
         total_ms = (time.time() - start_t) * 1000.0
 
