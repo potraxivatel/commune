@@ -10,7 +10,7 @@
 [![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Инференс: llama.cpp](https://img.shields.io/badge/инференс-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Статус: v0.2.0 Alpha](https://img.shields.io/badge/статус-v0.2.0%20alpha-brightgreen.svg)]()
-[![Тесты: 46 пройдено](https://img.shields.io/badge/тесты-46%20пройдено-success.svg)]()
+[![Тесты: 55 пройдено](https://img.shields.io/badge/тесты-55%20пройдено-success.svg)]()
 
 [Архитектура](#архитектура) •
 [Центральная гипотеза](#центральная-гипотеза) •
@@ -132,7 +132,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-Все 46 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти) выполняются локально без обращений к сети и без обязательного наличия GPU.
+Все 55 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти, системные инструменты) выполняются локально без обращений к сети и без обязательного наличия GPU.
 
 ---
 
@@ -169,8 +169,10 @@ commune/
 │   │   └── store.py          # Хранилище памяти с аудитом и разделением категорий
 │   ├── router/
 │   │   └── router.py         # Маршрутизатор задач в граф выполнения (DAG)
-│   └── scheduler/
-│       └── scheduler.py      # Планировщик топологического параллельного запуска
+│   ├── scheduler/
+│   │   └── scheduler.py      # Планировщик топологического параллельного запуска
+│   ├── tools/                # Детерминированные инструменты (чтение, запись, bash, компрессия)
+│   └── workflows/            # Ступенчатые пайплайны (CodebasePipeline)
 ├── llms/
 │   ├── stock/                # Базовые открытые веса
 │   └── custom/               # Дообученные специализированные модели (.gguf)
@@ -204,10 +206,10 @@ commune/
   - [x] Экстрактор памяти Memory Writer (Qwen 2.5 0.5B GGUF)
   - [x] Модуль сжатия контекста Stage 2 Compressor (Qwen 2.5 0.5B GGUF)
 - [x] **Фаза 2.7: Интерактивная консоль и профайлер** (`cli.py`)
-- [ ] **Фаза 3: Системные инструменты и анализ кодовой базы**
-  - [ ] Инструменты файловой системы (`read_file`, `patch_file`, `git_diff`)
-  - [ ] Безопасный запуск терминальных подпроцессов
-  - [ ] Автоматический индекс структуры кода (AST)
+- [x] **Фаза 3: Системные инструменты и ступенчатый пайплайн**
+  - [x] Детерминированные инструменты файловой системы (`read_file`, `write_file`, `list_dir`)
+  - [x] Асинхронный запуск терминальных команд (`run_command`) с таймаутами
+  - [x] Ступенчатый пайплайн: Выполнение ➔ Сжатие шума (Stage 2 Compressor) ➔ Долговременная память
 - [ ] **Фаза 4: Экосистема агентов и сетевые протоколы**
   - [ ] Поддержка Model Context Protocol (MCP)
   - [ ] Автономный агентный цикл с подтверждением действий
@@ -239,7 +241,7 @@ commune/
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Inference: llama.cpp](https://img.shields.io/badge/inference-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Status: v0.2.0 Alpha](https://img.shields.io/badge/status-v0.2.0%20alpha-brightgreen.svg)]()
-[![Tests: 46 passed](https://img.shields.io/badge/tests-46%20passed-success.svg)]()
+[![Tests: 55 passed](https://img.shields.io/badge/tests-55%20passed-success.svg)]()
 
 [Architecture](#architecture) •
 [Core Hypothesis](#core-hypothesis) •
@@ -361,7 +363,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-All 46 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore) run hermetically without external network calls or GPU requirements.
+All 55 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore, deterministic tools) run hermetically without external network calls or GPU requirements.
 
 ---
 
@@ -398,8 +400,10 @@ commune/
 │   │   └── store.py          # Category-partitioned JSON store with audit log
 │   ├── router/
 │   │   └── router.py         # Decision-table router producing execution Plans
-│   └── scheduler/
-│       └── scheduler.py      # Topological DAG runner with parallel execution
+│   ├── scheduler/
+│   │   └── scheduler.py      # Topological DAG runner with parallel execution
+│   ├── tools/                # Deterministic tools (read, write, list, run_command, compressor)
+│   └── workflows/            # Staged execution workflows (CodebasePipeline)
 ├── llms/
 │   ├── stock/                # Stock base model weights
 │   └── custom/               # Fine-tuned worker models (.gguf)
@@ -433,10 +437,10 @@ commune/
   - [x] Fine-tuned Memory Writer (Qwen 2.5 0.5B GGUF)
   - [x] Fine-tuned Stage 2 Compressor (Qwen 2.5 0.5B GGUF)
 - [x] **Phase 2.7: Interactive Shell & Profiler** (`cli.py`)
-- [ ] **Phase 3: System Tools & Codebase Operations**
-  - [ ] Deterministic filesystem tools (`read_file`, `patch_file`, `git_diff`)
-  - [ ] Safe subprocess execution runner
-  - [ ] Live AST project indexer
+- [x] **Phase 3: Deterministic Tools & Staged Pipeline**
+  - [x] Deterministic filesystem tools (`read_file`, `write_file`, `list_dir`)
+  - [x] Safe async subprocess execution runner (`run_command`) with timeouts
+  - [x] 3-stage pipeline: Tool Execution ➔ Noise Compression ➔ Persistent Memory Update
 - [ ] **Phase 4: Agent Ecosystem & Protocols**
   - [ ] Model Context Protocol (MCP) server & client integration
   - [ ] Autonomous tool-calling loop with verification

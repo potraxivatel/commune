@@ -1,10 +1,10 @@
 [
   {
-    "timestamp": 1795353372.9963148,
+    "timestamp": 1795356109.8458807,
     "action": "add",
-    "record_id": "31c54b44e1ba",
-    "key": "session.user_message",
-    "source": "component:memory-writer",
+    "record_id": "a7440debf666",
+    "key": "tool_run_run_command_1795356109",
+    "source": "pipeline:run_command",
     "old_version": null,
     "new_version": 1,
     "details": ""
