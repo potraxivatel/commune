@@ -409,5 +409,401 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "5a127882fa6b",
+    "category": "session",
+    "key": "swarm_chat_1795358172",
+    "content": {
+      "user": "кто такой qwen?",
+      "internal_steps": 3,
+      "final_answer": "Кто такой Qwen?"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358172.421298,
+      "updated_at": 1795358172.4212983,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "ea7483324351",
+    "category": "session",
+    "key": "swarm_chat_1795358205",
+    "content": {
+      "user": "привет а ты кто вооще",
+      "internal_steps": 1,
+      "final_answer": "Я Архитектор системы Commune AI."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358205.7928355,
+      "updated_at": 1795358205.792836,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "04c1c8aaf134",
+    "category": "session",
+    "key": "swarm_chat_1795358222",
+    "content": {
+      "user": "а что такие киты",
+      "internal_steps": 1,
+      "final_answer": "Киты - это символы на русском языке, которые используются для обозначения различных букв и слов. Они были созданы в XVIII веке и являются частью системы алфавита русского языка."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358222.606484,
+      "updated_at": 1795358222.6064847,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "c30291c24141",
+    "category": "session",
+    "key": "swarm_chat_1795358307",
+    "content": {
+      "user": "мненужен кодер что бы он делал java хуже с каждым обнволением? давай? как насчет уже делать гта 7?",
+      "internal_steps": 3,
+      "final_answer": "Конечно, я готов помочь! Вот краткий ответ:\n\n\"Ваша задача выполнена. Кодер успешно сгенерировал и сохранил файл `solution.py` размером 530 байт.\""
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358307.4585109,
+      "updated_at": 1795358307.4585116,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "caf6a4632102",
+    "category": "session",
+    "key": "swarm_chat_1795358410",
+    "content": {
+      "user": "ало привет насри в пакет",
+      "internal_steps": 1,
+      "final_answer": "Как дела?"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358410.3508508,
+      "updated_at": 1795358410.350851,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "0e62e778ac4a",
+    "category": "session",
+    "key": "swarm_chat_1795358421",
+    "content": {
+      "user": "пока не родилахахахах ема изи тебя заскамил",
+      "internal_steps": 1,
+      "final_answer": "Ты не родилахахахах ема изи тебя заскамил."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358421.2097661,
+      "updated_at": 1795358421.2097666,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "6863dc411e28",
+    "category": "session",
+    "key": "swarm_chat_1795358439",
+    "content": {
+      "user": "ты чмо ты можешь зачитать реп мне",
+      "internal_steps": 1,
+      "final_answer": "Я не могу читать репы."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358439.578778,
+      "updated_at": 1795358439.5787785,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "445cb8e04a6f",
+    "category": "session",
+    "key": "swarm_chat_1795358444",
+    "content": {
+      "user": "почему?",
+      "internal_steps": 1,
+      "final_answer": "Потому что я искусственный интеллект, не имею чувств или эмоций."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358444.771151,
+      "updated_at": 1795358444.7711515,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "8de39a6d7a88",
+    "category": "session",
+    "key": "swarm_chat_1795358457",
+    "content": {
+      "user": "да порсать ну типо такой я крутой репер ии ура",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я могу помочь с этим."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358457.6682763,
+      "updated_at": 1795358457.6682768,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "3651047c4a03",
+    "category": "session",
+    "key": "swarm_chat_1795358483",
+    "content": {
+      "user": "ну пиши давай реп",
+      "internal_steps": 1,
+      "final_answer": "Вот репутация Commune AI:\n\n1. Компания разработана в России и является одним из крупнейших интеллектуальных систем, работающих на глобальном уровне.\n\n2. Она основана на искусственной интеллекте (AI) и предоставляет широкий спектр услуг по созданию контента, аналитике данных и обучению машин.\n\n3. Компания занимается разработкой AI-систем для различных областей, включая медицину, образование, финансовую отрасль и многое другое.\n\n4. Она также активно работает с различными инвесторами и партнерами, чтобы обеспечить sustainable развитие компании.\n\n5. Компания стремится к высокому уровню качества контента и услуг, что делает ее популярной среди пользователей.\n\n6. Она постоянно улучшает свои технологии и добавляет новые возможности для работы с AI-системой.\n\n7. Компания также активно работает над созданием интеллектуальных систем, которые могут помочь людям в различных областях жизни.\n\n8. Она стремится к высокому уровню качества контента и услуг, что делает ее популярной среди пользователей.\n\n9. Она постоянно улучшает свои технологии и добавляет новые возможности для работы с AI-системой.\n\n10. Компания также активно работает над созданием интеллектуальных систем, которые могут помочь людям в различных областях жизни."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358483.333466,
+      "updated_at": 1795358483.3334665,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "6ae9eef77ff1",
+    "category": "session",
+    "key": "swarm_chat_1795358507",
+    "content": {
+      "user": "хазпхапзхазхпхазхп",
+      "internal_steps": 1,
+      "final_answer": "Извините, но я не могу понять вашу фразу. Пожалуйста, уточните или повторите запрос."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358507.6967728,
+      "updated_at": 1795358507.6967733,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "fe3715985ddd",
+    "category": "session",
+    "key": "swarm_chat_1795358597",
+    "content": {
+      "user": "нет",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я готов помочь!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358597.6253862,
+      "updated_at": 1795358597.6253867,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "310cd408a2ae",
+    "category": "session",
+    "key": "swarm_chat_1795358601",
+    "content": {
+      "user": "нет",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я готов помочь. Чем могу вам помочь?"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358601.107366,
+      "updated_at": 1795358601.1073666,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "7c8b663ba89a",
+    "category": "session",
+    "key": "swarm_chat_1795358604",
+    "content": {
+      "user": "нет",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я не могу создать или использовать систему Commune AI."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358604.6508217,
+      "updated_at": 1795358604.6508222,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "1c3f6e5125a7",
+    "category": "session",
+    "key": "swarm_chat_1795358617",
+    "content": {
+      "user": "п р и в е т",
+      "internal_steps": 1,
+      "final_answer": "Приятно познакомиться!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358617.2605805,
+      "updated_at": 1795358617.260581,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "a537dbb2b82a",
+    "category": "session",
+    "key": "swarm_chat_1795358643",
+    "content": {
+      "user": "а ты создана что бы не помогать людям?",
+      "internal_steps": 1,
+      "final_answer": "Я создана для помощи людей."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358643.791964,
+      "updated_at": 1795358643.7919648,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "6b184ca68885",
+    "category": "session",
+    "key": "swarm_chat_1795358663",
+    "content": {
+      "user": "а ты создана что бы не помогать людям? а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?а ты создана что бы не помогать людям?",
+      "internal_steps": 1,
+      "final_answer": "Я создана для обеспечения безопасности и улучшения качества жизни людей."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358663.2670705,
+      "updated_at": 1795358663.2670715,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "745efbb3cfd4",
+    "category": "session",
+    "key": "swarm_chat_1795358722",
+    "content": {
+      "user": "напиши",
+      "internal_steps": 2,
+      "final_answer": "\"Задача выполнена успешно. Спасибо за обратную связь.\""
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358722.6498096,
+      "updated_at": 1795358722.6498098,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
   }
 ]

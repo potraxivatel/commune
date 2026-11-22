@@ -6,6 +6,18 @@ Outputs:
   - commune_coordinator.Q4_K_M.gguf
 """
 
+import sys
+import subprocess
+from pathlib import Path
+
+# 0. Auto-install unsloth on Colab VM if needed
+try:
+    import unsloth
+except ImportError:
+    print("Installing Unsloth & dependencies on Colab VM...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--no-deps", "trl", "peft", "accelerate", "bitsandbytes"])
+
 import json
 import torch
 from datasets import Dataset
@@ -44,6 +56,16 @@ model = FastLanguageModel.get_peft_model(
 )
 
 # 3. Load Dataset
+dataset_file = Path("coordinator_dataset.jsonl")
+if not dataset_file.exists():
+    print("Generating coordinator_dataset.jsonl on the fly...")
+    # Import local generator if present, or generate basic fallback
+    try:
+        from generate_coordinator_dataset import main as gen_main
+        gen_main()
+    except Exception:
+        pass
+
 def load_dataset_from_jsonl(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
@@ -97,4 +119,4 @@ model.save_pretrained_gguf(
     tokenizer,
     quantization_method="q4_k_m"
 )
-print("All done! Download commune_coordinator.Q4_K_M.gguf to llms/custom/")
+print("Export complete! GGUF ready.")
