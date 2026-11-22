@@ -4,6 +4,8 @@
 
 **A modular, local-first compound AI orchestration engine built around staged aggregation and persistent memory.**
 
+[English](README.md) • [Русский](README_RU.md)
+
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Inference: llama.cpp](https://img.shields.io/badge/inference-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
