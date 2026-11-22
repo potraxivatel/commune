@@ -1,20 +1,10 @@
 [
   {
-    "timestamp": 1795352935.7949173,
+    "timestamp": 1795353115.9417217,
     "action": "add",
-    "record_id": "802ac3c7a7eb",
-    "key": "project.phase_5.test_proportion",
-    "source": "component:custom-memory-writer",
-    "old_version": null,
-    "new_version": 1,
-    "details": ""
-  },
-  {
-    "timestamp": 1795352937.7971067,
-    "action": "add",
-    "record_id": "2b4ed8792adb",
-    "key": "project.engine",
-    "source": "component:custom-memory-writer",
+    "record_id": "083abadbce4c",
+    "key": "project.tech.terminal",
+    "source": "component:memory-writer",
     "old_version": null,
     "new_version": 1,
     "details": ""
