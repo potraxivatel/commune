@@ -10,7 +10,7 @@
 [![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Инференс: llama.cpp](https://img.shields.io/badge/инференс-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Статус: v0.2.0 Alpha](https://img.shields.io/badge/статус-v0.2.0%20alpha-brightgreen.svg)]()
-[![Тесты: 55 пройдено](https://img.shields.io/badge/тесты-55%20пройдено-success.svg)]()
+[![Тесты: 58 пройдено](https://img.shields.io/badge/тесты-58%20пройдено-success.svg)]()
 
 [Архитектура](#архитектура) •
 [Центральная гипотеза](#центральная-гипотеза) •
@@ -132,7 +132,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-Все 55 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти, системные инструменты) выполняются локально без обращений к сети и без обязательного наличия GPU.
+Все 58 модульных тестов (ядро, планировщик, DAG, типизация, хранилище памяти, системные инструменты, агентный цикл) выполняются локально без обращений к сети и без обязательного наличия GPU.
 
 ---
 
@@ -171,6 +171,7 @@ commune/
 │   │   └── router.py         # Маршрутизатор задач в граф выполнения (DAG)
 │   ├── scheduler/
 │   │   └── scheduler.py      # Планировщик топологического параллельного запуска
+│   ├── agent/                # Автономный агентный цикл (AgentLoop) и схемы тулзов
 │   ├── tools/                # Детерминированные инструменты (чтение, запись, bash, компрессия)
 │   └── workflows/            # Ступенчатые пайплайны (CodebasePipeline)
 ├── llms/
@@ -210,9 +211,10 @@ commune/
   - [x] Детерминированные инструменты файловой системы (`read_file`, `write_file`, `list_dir`)
   - [x] Асинхронный запуск терминальных команд (`run_command`) с таймаутами
   - [x] Ступенчатый пайплайн: Выполнение ➔ Сжатие шума (Stage 2 Compressor) ➔ Долговременная память
-- [ ] **Фаза 4: Экосистема агентов и сетевые протоколы**
-  - [ ] Поддержка Model Context Protocol (MCP)
-  - [ ] Автономный агентный цикл с подтверждением действий
+- [x] **Фаза 4: Автономный агентный цикл и протоколы инструментов**
+  - [x] Стандартная схема вызова инструментов (JSON-schema / OpenAI compatible)
+  - [x] Автономный цикл принятия решений (`AgentLoop`) с защитой от зацикливания
+  - [ ] Поддержка Model Context Protocol (MCP) клиент/сервер
 - [ ] **Фаза 5: Эмпирические бенчмарки**
   - [ ] Замеры задержки, VRAM и качества в сравнении с 7B/14B монолитами
 
@@ -241,7 +243,7 @@ commune/
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Inference: llama.cpp](https://img.shields.io/badge/inference-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Status: v0.2.0 Alpha](https://img.shields.io/badge/status-v0.2.0%20alpha-brightgreen.svg)]()
-[![Tests: 55 passed](https://img.shields.io/badge/tests-55%20passed-success.svg)]()
+[![Tests: 58 passed](https://img.shields.io/badge/tests-58%20passed-success.svg)]()
 
 [Architecture](#architecture) •
 [Core Hypothesis](#core-hypothesis) •
@@ -363,7 +365,7 @@ pip install -e ".[dev]"
 pytest -v
 ```
 
-All 55 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore, deterministic tools) run hermetically without external network calls or GPU requirements.
+All 58 core tests (Engine, Scheduler, DAG, Envelope, MemoryStore, deterministic tools, agent loop) run hermetically without external network calls or GPU requirements.
 
 ---
 
@@ -402,6 +404,7 @@ commune/
 │   │   └── router.py         # Decision-table router producing execution Plans
 │   ├── scheduler/
 │   │   └── scheduler.py      # Topological DAG runner with parallel execution
+│   ├── agent/                # Autonomous AgentLoop & tool calling schemas
 │   ├── tools/                # Deterministic tools (read, write, list, run_command, compressor)
 │   └── workflows/            # Staged execution workflows (CodebasePipeline)
 ├── llms/
@@ -441,9 +444,10 @@ commune/
   - [x] Deterministic filesystem tools (`read_file`, `write_file`, `list_dir`)
   - [x] Safe async subprocess execution runner (`run_command`) with timeouts
   - [x] 3-stage pipeline: Tool Execution ➔ Noise Compression ➔ Persistent Memory Update
-- [ ] **Phase 4: Agent Ecosystem & Protocols**
-  - [ ] Model Context Protocol (MCP) server & client integration
-  - [ ] Autonomous tool-calling loop with verification
+- [x] **Phase 4: Autonomous Agent Loop & Tool Protocols**
+  - [x] Standard tool-calling schemas (JSON-schema / OpenAI compatible)
+  - [x] Autonomous multi-step decision loop (`AgentLoop`) with cycle protection
+  - [ ] Model Context Protocol (MCP) client/server integration
 - [ ] **Phase 5: Empirical Benchmark vs. Monolithic Baselines**
   - [ ] Latency, VRAM, and accuracy evaluation against 7B/14B single-model baselines
 

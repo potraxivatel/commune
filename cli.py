@@ -34,6 +34,7 @@ from rich.text import Text
 
 from engine.communication.envelope import ContentType, Envelope, MessageStatus
 from engine.core.component import Component, ComponentKind, ComponentManifest
+from engine.agent import AgentLoop
 from engine.core.engine import Engine
 from engine.inference.llama_backend import LlamaComponent
 from engine.memory.records import MemoryCategory, MemoryUpdate
@@ -254,6 +255,15 @@ async def main():
     engine.register(cmd_tool)
     engine.register(pipeline_tool)
 
+    # 1c. Register Autonomous Agent Loop
+    agent_loop = AgentLoop(
+        tools=[read_tool, write_tool, list_tool, cmd_tool],
+        llm=None,
+        compressor=CompressorComponent(),
+        memory_store=store,
+    )
+    engine.register(agent_loop)
+
     # 2. Register Custom Models if available
     custom_writer_path = base_dir / "llms" / "custom" / "pyramid_memory_writer.Q4_K_M.gguf"
     custom_compressor_path = base_dir / "llms" / "custom" / "commune_compressor.Q4_K_M.gguf"
@@ -332,6 +342,10 @@ async def main():
         keywords=["pipeline", "пайплайн", "исследуй", "investigate", "staged"],
         steps=[PlanStep(component="codebase_pipeline")],
     )
+    engine.add_route(
+        keywords=["агент", "agent", "создай файл", "сделай", "запусти команду"],
+        steps=[PlanStep(component="agent_loop")],
+    )
 
     engine.set_default_route([PlanStep(component="parser")])
 
@@ -362,6 +376,7 @@ async def main():
                     "  [bold green]/read[/] <path>         - Read local file with syntax output\n"
                     "  [bold green]/run[/] <command>       - Execute shell command via Commune tool\n"
                     "  [bold green]/pipeline[/] <command>  - 3-stage pipeline (Execute → Compress → Persist)\n"
+                    "  [bold green]/agent[/] <task>        - Autonomous agent loop (decides & runs tools)\n"
                     "  [bold green]/clear[/]               - Clear screen\n"
                     "  [bold green]/exit[/]                - Exit CLI\n\n"
                     "[bold cyan]Example Prompts:[/]\n"
@@ -436,6 +451,25 @@ async def main():
 
                 comp_content = str(res.get("stage2_compressed", {}).content)
                 console.print(Panel(comp_content, title="Compressed Knowledge Result", border_style="green"))
+                continue
+            elif user_input.startswith("/agent "):
+                task_prompt = user_input[7:].strip()
+                with console.status(f"[bold cyan]Agent Loop executing:[/] {task_prompt}", spinner="dots"):
+                    res = await agent_loop.run_task(task_prompt)
+
+                traces = res.get("traces", [])
+                if traces:
+                    trace_table = Table(box=None, padding=(0, 2), show_header=False)
+                    for tr in traces:
+                        trace_table.add_row(
+                            f"[bold green]Step {tr['step']}[/]",
+                            f"[cyan]{tr['tool']}[/]",
+                            f"[yellow]{tr['duration_ms']:.1f}ms[/]",
+                            f"[dim]{str(tr['result'])[:80]}...[/]",
+                        )
+                    console.print(Panel(trace_table, title=f"Agent Action Plan ({res.get('duration_ms', 0):.1f}ms)", border_style="cyan"))
+
+                console.print(Panel(res.get("final_answer", ""), title="Agent Final Result", border_style="green"))
                 continue
             elif user_input == "/clear":
                 console.clear()

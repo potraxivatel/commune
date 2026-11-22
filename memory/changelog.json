@@ -1,10 +1,10 @@
 [
   {
-    "timestamp": 1795356109.8458807,
+    "timestamp": 1795356616.9029403,
     "action": "add",
-    "record_id": "a7440debf666",
-    "key": "tool_run_run_command_1795356109",
-    "source": "pipeline:run_command",
+    "record_id": "056ba45f251a",
+    "key": "agent_task_1795356616",
+    "source": "agent_loop",
     "old_version": null,
     "new_version": 1,
     "details": ""

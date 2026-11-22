@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "a7440debf666",
+    "category": "knowledge",
+    "key": "tool_run_run_command_1795356109",
+    "content": {
+      "tool": "run_command",
+      "summary": "TEST_SUMMARY: ============================== 55 passed in 1.01s ==============================",
+      "compression_ratio": 63.03
+    },
+    "tags": [
+      "tool_run",
+      "run_command"
+    ],
+    "provenance": {
+      "source": "pipeline:run_command",
+      "created_at": 1795356109.8458352,
+      "updated_at": 1795356109.8458364,
+      "component": "commune_pipeline"
+    },
+    "status": "active",
+    "version": 1
+  }
+]
