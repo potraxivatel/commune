@@ -82,3 +82,17 @@ async def test_swarm_team_selective_review(tmp_path: Path):
     assert "reviewer" in senders
     assert "coder" not in senders
     assert turn.final_answer.recipient == "user"
+
+
+@pytest.mark.asyncio
+async def test_swarm_team_banter_routed_to_troll():
+    team = SwarmTeam(memory_store=None)
+    turn = await team.chat("ты чмо ебанное я владелец крутой криптобиржи я тебя отключу")
+
+    # Banter: Planner routes to Toxic Senior (Coder & Reviewer sleep!)
+    assert len(turn.internal_discussion) == 1
+    assert "Токсичному Синьору" in turn.internal_discussion[0].content
+    assert turn.final_answer.sender == "troll"
+    assert turn.final_answer.role_title == "Токсичный Синьор"
+    assert turn.final_answer.avatar == "🤬"
+    assert len(turn.final_answer.content) > 0

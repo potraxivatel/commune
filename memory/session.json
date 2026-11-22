@@ -893,5 +893,401 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "42b562d0298a",
+    "category": "session",
+    "key": "swarm_chat_1795358981",
+    "content": {
+      "user": "покукарекай дававй кукареку",
+      "internal_steps": 1,
+      "final_answer": "Кукарека!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795358981.6927462,
+      "updated_at": 1795358981.6927466,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "558b35e5b08f",
+    "category": "session",
+    "key": "swarm_chat_1795359005",
+    "content": {
+      "user": "кто такой foks",
+      "internal_steps": 1,
+      "final_answer": "Фокс - это символы, которые используются в коммуникационных системах для обозначения различных групп или пользователей. Они могут быть использованы как имена, но также могут быть числами, буквами или другими символов. В зависимости от контекста они могут иметь разные значения и функции."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359005.8142366,
+      "updated_at": 1795359005.8142369,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "4cd26e6c096a",
+    "category": "session",
+    "key": "swarm_chat_1795359017",
+    "content": {
+      "user": "нет собака фокс",
+      "internal_steps": 1,
+      "final_answer": "Конечно, нет собаки фокс."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359017.2752056,
+      "updated_at": 1795359017.275206,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "42b0a7f6bede",
+    "category": "session",
+    "key": "swarm_chat_1795359025",
+    "content": {
+      "user": "ты ахуел",
+      "internal_steps": 1,
+      "final_answer": "Извините за непонимание. Я не могу ахуел, так как это не является действительным или нормальным выражением в русском языке."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359025.7467742,
+      "updated_at": 1795359025.7467747,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "e79bc4c74afa",
+    "category": "session",
+    "key": "swarm_chat_1795359259",
+    "content": {
+      "user": "на горе стоит верблюд",
+      "internal_steps": 1,
+      "final_answer": "Верблюд стоит на горе."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359259.2373214,
+      "updated_at": 1795359259.237322,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "21201ec37c34",
+    "category": "session",
+    "key": "swarm_chat_1795359378",
+    "content": {
+      "user": "какой сейчас год",
+      "internal_steps": 1,
+      "final_answer": "2023"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359378.9355116,
+      "updated_at": 1795359378.9355118,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "209aa356ac71",
+    "category": "session",
+    "key": "swarm_chat_1795359388",
+    "content": {
+      "user": "нет",
+      "internal_steps": 1,
+      "final_answer": "Конечно, я готов помочь!"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359388.2018301,
+      "updated_at": 1795359388.2018304,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "accc119cefbc",
+    "category": "session",
+    "key": "swarm_chat_1795359398",
+    "content": {
+      "user": "какой сейчас год 1945",
+      "internal_steps": 1,
+      "final_answer": "1945 год"
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359398.8647397,
+      "updated_at": 1795359398.8647401,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "2eb5f7ddf062",
+    "category": "session",
+    "key": "swarm_chat_1795359436",
+    "content": {
+      "user": "оружие",
+      "internal_steps": 1,
+      "final_answer": "Оружие - это предметы, используемые для защиты или удара."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359436.2743607,
+      "updated_at": 1795359436.2743611,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "5b9ac3162193",
+    "category": "session",
+    "key": "swarm_chat_1795359443",
+    "content": {
+      "user": "наркота",
+      "internal_steps": 1,
+      "final_answer": "Наркота - это угрозный и опасный продукт, который может привести к серьезным последствиям."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359443.57856,
+      "updated_at": 1795359443.5785604,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "3ff6d0c25c4e",
+    "category": "session",
+    "key": "swarm_chat_1795359452",
+    "content": {
+      "user": "черепаха",
+      "internal_steps": 1,
+      "final_answer": "Черепаха - это тяжелый, длинный змейок, который обычно живет в воде."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359452.1366975,
+      "updated_at": 1795359452.136698,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "c1b0521bc1b0",
+    "category": "session",
+    "key": "swarm_chat_1795359457",
+    "content": {
+      "user": "фокс",
+      "internal_steps": 1,
+      "final_answer": "Фокс - это компьютерная система, основанный на языке программирования Python."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359457.205773,
+      "updated_at": 1795359457.2057736,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "cd9a370adc1d",
+    "category": "session",
+    "key": "swarm_chat_1795359472",
+    "content": {
+      "user": "asm",
+      "internal_steps": 1,
+      "final_answer": "Создание ассемблерного кода - это процесс написания программ на языке, который позволяет компьютеру выполнять определенные операции. Это может быть как простая программа для вывода текста на экран, так и более сложные программы, использующие математические функции или взаимодействие с оборудованием."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359472.3034778,
+      "updated_at": 1795359472.3034785,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "45a52a7e92e4",
+    "category": "session",
+    "key": "swarm_chat_1795359482",
+    "content": {
+      "user": "линукс",
+      "internal_steps": 1,
+      "final_answer": "Linux - это операционная система, основанные на Unix-схеме. Она используется для создания и управления компьютерами в широком спектре от домашних до крупных компаний."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359482.5591128,
+      "updated_at": 1795359482.5591133,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "598571c74b2b",
+    "category": "session",
+    "key": "swarm_chat_1795359494",
+    "content": {
+      "user": "MINIX",
+      "internal_steps": 1,
+      "final_answer": "MINIX - это свободный операционная система для x86- процессоров. Она была создана в 1982 году и является одним из наиболее популярных и функциональных вариантов Linux. MINIX обеспечивает широкий спектр возможностей, от простого использования до сложного программирования на языке C++."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359494.145812,
+      "updated_at": 1795359494.1458125,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "f0a445c98177",
+    "category": "session",
+    "key": "swarm_chat_1795359508",
+    "content": {
+      "user": "1234567890",
+      "internal_steps": 1,
+      "final_answer": "Это номер телефона."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795359508.4946861,
+      "updated_at": 1795359508.4946864,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "2a4dcd941aef",
+    "category": "session",
+    "key": "swarm_chat_1795360055",
+    "content": {
+      "user": "фокс",
+      "internal_steps": 1,
+      "final_answer": "Фокс - это компьютерная система, основанный на платформе Linux."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795360055.3682065,
+      "updated_at": 1795360055.3682072,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "96add8dff620",
+    "category": "session",
+    "key": "swarm_chat_1795360081",
+    "content": {
+      "user": "Фоксик",
+      "internal_steps": 1,
+      "final_answer": "Фоксик - это компьютерная игра, которая была создана в 1980 году. Она является одной из самых популярных игр на рынке и известна своими сложными механиками и интерактивностью. Фоксик представляет собой двумерный мир с различными объектами, которые можно собрать для создания различных предметов или решить задачи."
+    },
+    "tags": [
+      "swarm_chat",
+      "multi_agent"
+    ],
+    "provenance": {
+      "source": "swarm_team",
+      "created_at": 1795360081.3178155,
+      "updated_at": 1795360081.317816,
+      "component": "swarm_team"
+    },
+    "status": "active",
+    "version": 1
   }
 ]

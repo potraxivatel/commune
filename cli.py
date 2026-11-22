@@ -142,8 +142,9 @@ def is_easter_egg_active() -> bool:
     return (today.month == 4 and today.day == 1) or ("--comrade" in sys.argv)
 
 
-def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has_coder: bool = False):
+def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has_coder: bool = False, has_coordinator: bool = False, has_troll: bool = False):
     easter_egg = is_easter_egg_active()
+    base_dir = Path(__file__).parent
     title = Text()
 
     if easter_egg:
@@ -161,6 +162,8 @@ def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has
     status_line.append(f"• Collective Archive: {store.count} memory records loaded\n", style="green")
     
     workers = []
+    if has_coordinator:
+        workers.append("Swarm Dispatcher")
     if has_coder:
         coder_1_5b = base_dir / "llms" / "stock" / "qwen2.5-coder-1.5b-instruct-q4_k_m.gguf"
         lbl = "Qwen 2.5 Coder 1.5B (Brain)" if coder_1_5b.exists() else "Qwen 2.5 Coder 0.5B (Brain)"
@@ -169,6 +172,8 @@ def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool, has
         workers.append("Memory Writer")
     if has_compressor:
         workers.append("Stage 2 Compressor")
+    if has_troll:
+        workers.append("Toxic Senior")
     
     if workers:
         status_line.append(f"• Neural Workers: {', '.join(workers)} (GGUF) [ONLINE]\n", style="bold green")
@@ -294,18 +299,55 @@ async def main():
     )
     engine.register(agent_loop)
 
-    # 1e. Register Swarm Council of Agents with Neural Brain
-    swarm_team = SwarmTeam(memory_store=store, llm=coder_llm)
-    engine.register(swarm_team)
-
     # 2. Register Custom Models if available
     custom_writer_path = base_dir / "llms" / "custom" / "pyramid_memory_writer.Q4_K_M.gguf"
     custom_compressor_path = base_dir / "llms" / "custom" / "commune_compressor.Q4_K_M.gguf"
+    custom_coordinator_path = base_dir / "llms" / "custom" / "commune_coordinator.Q4_K_M.gguf"
+    custom_troll_path = base_dir / "llms" / "custom" / "commune_troll.Q4_K_M.gguf"
 
-    has_custom = custom_writer_path.exists()
+    has_writer = custom_writer_path.exists()
     has_compressor = custom_compressor_path.exists()
+    has_coordinator = custom_coordinator_path.exists()
+    has_troll = custom_troll_path.exists()
 
-    if has_writer := has_custom:
+    coordinator_llm = None
+    if has_coordinator:
+        from training.generate_coordinator_dataset import SYSTEM_PROMPT as COORD_SYS
+        coordinator_llm = LlamaComponent(
+            name="coordinator-model",
+            model_path=custom_coordinator_path,
+            system_prompt=COORD_SYS,
+            n_ctx=1024,
+            temperature=0.1,
+            max_tokens=256,
+        )
+        await coordinator_llm.load()
+        engine.register(coordinator_llm)
+
+    troll_llm = None
+    if has_troll:
+        from training.generate_troll_dataset import SYSTEM_PROMPT as TROLL_SYS
+        troll_llm = LlamaComponent(
+            name="troll-model",
+            model_path=custom_troll_path,
+            system_prompt=TROLL_SYS,
+            n_ctx=512,
+            temperature=0.2,
+            max_tokens=128,
+        )
+        await troll_llm.load()
+        engine.register(troll_llm)
+
+    # 1e. Register Swarm Council of Agents with Neural Brain
+    swarm_team = SwarmTeam(
+        memory_store=store,
+        llm=coder_llm,
+        coordinator_llm=coordinator_llm,
+        troll_llm=troll_llm,
+    )
+    engine.register(swarm_team)
+
+    if has_writer:
         llama_writer = LlamaComponent(
             name="qwen-extractor",
             model_path=custom_writer_path,
@@ -383,7 +425,7 @@ async def main():
 
     engine.set_default_route([PlanStep(component="parser")])
 
-    print_banner(store, has_writer, has_compressor, has_coder=has_coder)
+    print_banner(store, has_writer, has_compressor, has_coder=has_coder, has_coordinator=has_coordinator, has_troll=has_troll)
 
     # Prompt session with command history
     history_file = base_dir / ".commune_history"
@@ -507,7 +549,7 @@ async def main():
                 continue
             elif user_input == "/clear":
                 console.clear()
-                print_banner(store, has_writer, has_compressor, has_coder=has_coder)
+                print_banner(store, has_writer, has_compressor, has_coder=has_coder, has_coordinator=has_coordinator, has_troll=has_troll)
                 continue
 
             # Run Task through Commune Multi-Agent Swarm Council

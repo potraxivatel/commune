@@ -338,3 +338,46 @@ class ReviewerMember(SwarmMember):
         target_f = envelope.content if isinstance(envelope.content, str) else None
         msg = await self.verify(target_f)
         return Envelope(task_id=envelope.task_id, sender=self._name, content=msg.model_dump())
+
+
+class TrollMember(SwarmMember):
+    """
+    Токсичный Синьор: responds to insults, banter, whines, and trolls with sharp IT sarcasm and mat.
+    """
+
+    def __init__(self, llm: Component | None = None):
+        super().__init__(
+            name="troll",
+            role_title="Токсичный Синьор",
+            avatar="🤬",
+            description="Осаживает диванных критиков, защищает Foks'а и разносит токсиков хлёстким матом",
+        )
+        self._llm = llm
+
+    async def clapback(self, user_query: str) -> SwarmMessage:
+        """Generates sharp, sarcastic toxic response."""
+        reply = ""
+        if self._llm is not None:
+            try:
+                res = await self._llm.process(
+                    Envelope(task_id="troll_clapback", sender="user", content=user_query)
+                )
+                reply = str(res.content).strip()
+            except Exception:
+                reply = ""
+
+        if not reply:
+            reply = "Слышь, базарь проще. Foks фоксит идеально, а у тебя даже в терминале чистота меньше 150%. Задачу ставь нормально или отвали."
+
+        return SwarmMessage(
+            sender=self._name,
+            role_title=self._role_title,
+            avatar=self._avatar,
+            recipient="user",
+            content=reply,
+            is_internal=False,
+        )
+
+    async def process(self, envelope: Envelope, context: dict[str, Any] | None = None) -> Envelope:
+        msg = await self.clapback(str(envelope.content))
+        return Envelope(task_id=envelope.task_id, sender=self._name, content=msg.model_dump())
