@@ -10,7 +10,7 @@
 [![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Инференс: llama.cpp](https://img.shields.io/badge/инференс-llama.cpp%20(GGUF)-orange.svg)](https://github.com/ggerganov/llama.cpp)
 [![Статус: v0.2.0 Alpha](https://img.shields.io/badge/статус-v0.2.0%20alpha-brightgreen.svg)]()
-[![Тесты: 46 passed](https://img.shields.io/badge/тесты-46%20пройдено-success.svg)]()
+[![Тесты: 46 пройдено](https://img.shields.io/badge/тесты-46%20пройдено-success.svg)]()
 
 [Архитектура](#архитектура) •
 [Центральная гипотеза](#центральная-гипотеза) •
@@ -108,8 +108,8 @@
 
 ```bash
 # Клонирование репозитория
-git clone https://github.com/<your-username>/commune-ai.git
-cd commune-ai
+git clone https://github.com/potraxivatel/commune.git
+cd commune
 
 # Создание и активация виртуального окружения
 python3 -m venv .venv
@@ -155,7 +155,7 @@ pytest -v
 ## Структура репозитория
 
 ```
-commune-ai/
+commune/
 ├── engine/
 │   ├── core/
 │   │   ├── component.py      # Интерфейсы Component и Manifest
@@ -337,8 +337,8 @@ The project is designed from the ground up for **modest local hardware**: practi
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/commune-ai.git
-cd commune-ai
+git clone https://github.com/potraxivatel/commune.git
+cd commune
 
 # Set up virtual environment
 python3 -m venv .venv
@@ -384,7 +384,7 @@ Training pipelines live under [`training/`](training/):
 ## Project Structure
 
 ```
-commune-ai/
+commune/
 ├── engine/
 │   ├── core/
 │   │   ├── component.py      # Abstract Component & Manifest interfaces
