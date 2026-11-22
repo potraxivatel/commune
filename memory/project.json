@@ -1,0 +1,40 @@
+[
+  {
+    "id": "802ac3c7a7eb",
+    "category": "project",
+    "key": "project.phase_5.test_proportion",
+    "content": "Phase 5: Важная стадия для тестирования производительности и замеров VRAM.",
+    "tags": [
+      "phase",
+      "5",
+      "testing"
+    ],
+    "provenance": {
+      "source": "component:custom-memory-writer",
+      "created_at": 1795352935.794895,
+      "updated_at": 1795352935.7948954,
+      "component": "custom-memory-writer"
+    },
+    "status": "active",
+    "version": 1
+  },
+  {
+    "id": "2b4ed8792adb",
+    "category": "project",
+    "key": "project.engine",
+    "content": "GGUF использует Q4_K_M для точечной памяти, сохраняя 99% информации в 4К.",
+    "tags": [
+      "gguf",
+      "quantum",
+      "memory"
+    ],
+    "provenance": {
+      "source": "component:custom-memory-writer",
+      "created_at": 1795352937.797086,
+      "updated_at": 1795352937.7970862,
+      "component": "custom-memory-writer"
+    },
+    "status": "active",
+    "version": 1
+  }
+]
