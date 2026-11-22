@@ -138,7 +138,7 @@ def is_easter_egg_active() -> bool:
     return (today.month == 4 and today.day == 1) or ("--comrade" in sys.argv)
 
 
-def print_banner(store: MemoryStore, has_custom_model: bool):
+def print_banner(store: MemoryStore, has_writer: bool, has_compressor: bool):
     easter_egg = is_easter_egg_active()
     title = Text()
 
@@ -155,10 +155,17 @@ def print_banner(store: MemoryStore, has_custom_model: bool):
 
     status_line = Text()
     status_line.append(f"• Collective Archive: {store.count} memory records loaded\n", style="green")
-    if has_custom_model:
-        status_line.append("• Active Worker: Qwen 2.5 0.5B GGUF (Memory Writer) [READY]\n", style="bold green")
+    
+    workers = []
+    if has_writer:
+        workers.append("Memory Writer")
+    if has_compressor:
+        workers.append("Stage 2 Compressor")
+    
+    if workers:
+        status_line.append(f"• Custom Workers: {', '.join(workers)} (GGUF) [READY]\n", style="bold green")
     else:
-        status_line.append("• Active Worker: Mock components [READY]\n", style="yellow")
+        status_line.append("• Workers: Mock components [READY]\n", style="yellow")
     status_line.append("Type your task, or /help for available commands.", style="italic white")
 
     panel = Panel(
@@ -232,14 +239,17 @@ async def main():
     engine.register(WordCountComponent("analyzer"))
     engine.register(UpperComponent("formatter"))
 
-    # 2. Register Custom Model if available
-    custom_model_path = base_dir / "llms" / "custom" / "pyramid_memory_writer.Q4_K_M.gguf"
-    has_custom = custom_model_path.exists()
+    # 2. Register Custom Models if available
+    custom_writer_path = base_dir / "llms" / "custom" / "pyramid_memory_writer.Q4_K_M.gguf"
+    custom_compressor_path = base_dir / "llms" / "custom" / "commune_compressor.Q4_K_M.gguf"
 
-    if has_custom:
+    has_custom = custom_writer_path.exists()
+    has_compressor = custom_compressor_path.exists()
+
+    if has_writer := has_custom:
         llama_writer = LlamaComponent(
             name="qwen-extractor",
-            model_path=custom_model_path,
+            model_path=custom_writer_path,
             system_prompt=(
                 "You are the Pyramid Memory Writer. Extract salient facts into JSON matching schema:\n"
                 '{"key": "dot.key", "category": "project"|"knowledge"|"session", "content": "...", "tags": [...]}\n'
@@ -252,10 +262,27 @@ async def main():
         custom_comp = MemoryWriterComponent(llama_writer, store)
         engine.register(custom_comp)
 
-        # Route for memory extraction
         engine.add_route(
             keywords=["запомни", "память", "save", "remember", "fact", "факт"],
             steps=[PlanStep(component="memory-writer")],
+        )
+
+    if has_compressor:
+        compressor_comp = LlamaComponent(
+            name="compressor",
+            model_path=custom_compressor_path,
+            system_prompt=(
+                "You are the Commune Stage 2 Compressor. Compress raw noisy inputs into a dense bulleted summary."
+            ),
+            n_ctx=2048,
+            temperature=0.2,
+            max_tokens=256,
+        )
+        engine.register(compressor_comp)
+
+        engine.add_route(
+            keywords=["сожми", "compress", "summary", "выжимка", "лог"],
+            steps=[PlanStep(component="compressor")],
         )
 
     # Standard routes
@@ -275,7 +302,7 @@ async def main():
 
     engine.set_default_route([PlanStep(component="parser")])
 
-    print_banner(store, has_custom)
+    print_banner(store, has_writer, has_compressor)
 
     # Prompt session with command history
     history_file = base_dir / ".commune_history"
@@ -318,7 +345,7 @@ async def main():
                 continue
             elif user_input == "/clear":
                 console.clear()
-                print_banner(store, has_custom)
+                print_banner(store, has_writer, has_compressor)
                 continue
 
             # Run Task through Pyramid Engine
