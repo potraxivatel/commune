@@ -2,40 +2,35 @@
 
 Modular AI orchestration system with staged aggregation.
 
-See [PYRAMID_SPEC.md](PYRAMID_SPEC.md) for the full specification.
+See [PYRAMID_SPEC.md](PYRAMID_SPEC.md) for the full architectural specification.
 
 ## Quick Start
 
 ```bash
-# Install dependencies
-pip install -e ".[dev]"
+# Activate virtual environment
+source .venv/bin/activate
 
-# Run the demo (no GPU / no models needed)
-python demo.py
+# Launch Interactive Terminal Interface
+./cli.py
 
-# Run tests
+# Or run tests
 pytest -v
 ```
 
-## Project Status
+## Features
 
-**Phase 1 — Minimal Engine** (in progress)
+- **Engine Core:** Directed Acyclic Graph (DAG) scheduler with topological ordering, timeouts, and parallel execution.
+- **Typed Communication:** Every inter-component message is validated via `Envelope` (JSON-schemas, status, token counts, latency).
+- **Persistent Memory:** Category-partitioned JSON store (`project`, `knowledge`, `session`) with provenance, versioning, conflict detection, and audit changelog.
+- **Custom Fine-tuned GGUF Model:** Includes an in-house trained **Qwen 2.5 0.5B Instruct** running locally on CPU via `llama-cpp-python` as a dedicated **Memory Writer** extracting structured facts in ~2.0s.
+- **Interactive CLI:** Beautiful terminal UI powered by Rich & prompt_toolkit (`/memory`, `/routes`, execution latency breakdown).
 
-- [x] Repository structure
-- [x] Communication envelope (typed messages)
-- [x] Component interface (abstract base)
-- [x] Router (rule-based)
-- [x] Scheduler (dependency resolution, parallel execution, timeouts)
-- [x] Engine (route → schedule → execute → assemble)
-- [x] Mock components for testing
-- [x] Tests and demo
-- [ ] llama.cpp integration (LlamaComponent — code written, needs model)
+## Interactive Commands in CLI
 
-## Architecture
-
-```
-User → Engine → Router → Scheduler → [Components] → Assembler → Output
-```
-
-Components are replaceable. The engine doesn't care if a component
-is an LLM, a code parser, or a simple function.
+Inside `./cli.py`:
+- `запомни: <любой факт или правило>` — модель извлечет факт и сохранит в персистентную память.
+- `analyze <код или текст>` — прогон через 3-стадийный пайплайн (`parser` → `analyzer` → `formatter`).
+- `посчитай слова: <текст>` — быстрый запуск легковесного аналитического компонента.
+- `/memory` — просмотр сохраненных фактов и категорий.
+- `/routes` — текущая таблица маршрутизации и зависимостей между стадиями.
+- `/help` — список доступных команд.
