@@ -3,18 +3,26 @@
 Pyramid Interactive CLI
 
 Run:
-  python cli.py
+  ./cli.py
 """
+
+import os
+import sys
+from pathlib import Path
+
+# Auto-reexec inside .venv if launched with system python
+base_dir = Path(__file__).resolve().parent
+venv_python = base_dir / ".venv" / "bin" / "python3"
+if venv_python.exists() and sys.executable != str(venv_python):
+    os.execv(str(venv_python), [str(venv_python)] + sys.argv)
 
 import asyncio
 import json
 import logging
-import sys
 import time
-from pathlib import Path
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(base_dir))
 
 from prompt_toolkit import PromptSession
 from prompt_toolkit.history import FileHistory
