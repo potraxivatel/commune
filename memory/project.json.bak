@@ -36,5 +36,24 @@
     },
     "status": "active",
     "version": 1
+  },
+  {
+    "id": "083abadbce4c",
+    "category": "project",
+    "key": "project.tech.terminal",
+    "content": "Pyramid uses a terminal-based interface for command execution.",
+    "tags": [
+      "pyramid",
+      "interface",
+      "terminal"
+    ],
+    "provenance": {
+      "source": "component:memory-writer",
+      "created_at": 1795353115.9416997,
+      "updated_at": 1795353115.9417005,
+      "component": "memory-writer"
+    },
+    "status": "active",
+    "version": 1
   }
 ]

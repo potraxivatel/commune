@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "31c54b44e1ba",
+    "category": "session",
+    "key": "session.user_message",
+    "content": "You are the sender.",
+    "tags": [
+      "chat",
+      "conversation",
+      "user"
+    ],
+    "provenance": {
+      "source": "component:memory-writer",
+      "created_at": 1795353372.9962935,
+      "updated_at": 1795353372.9962938,
+      "component": "memory-writer"
+    },
+    "status": "active",
+    "version": 1
+  }
+]

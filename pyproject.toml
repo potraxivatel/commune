@@ -1,7 +1,7 @@
 [project]
-name = "pyramid-ai"
-version = "0.1.0"
-description = "Modular AI orchestration system with staged aggregation"
+name = "commune-ai"
+version = "0.2.0"
+description = "Cooperative AI orchestration engine with staged aggregation"
 requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.0",

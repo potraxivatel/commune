@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pyramid Interactive CLI
+Commune Interactive CLI
 
 Run:
   ./cli.py
@@ -133,21 +133,21 @@ class MemoryWriterComponent(Component):
 
 def print_banner(store: MemoryStore, has_custom_model: bool):
     title = Text()
-    title.append("▲ PYRAMID AI ", style="bold cyan")
-    title.append("— Modular Staged AI Orchestration System\n", style="dim white")
-    title.append("Version: 0.2.0 | Engine: Python + llama.cpp | Architecture: Staged Aggregation\n", style="dim")
+    title.append("☭ COMMUNE AI ", style="bold red")
+    title.append("— Cooperative Staged AI Engine\n", style="bold white")
+    title.append("Version: 0.2.0 | Engine: Python + llama.cpp | Architecture: Collective Intelligence\n", style="dim")
 
     status_line = Text()
-    status_line.append(f"• Persistent Memory: {store.count} records loaded\n", style="green")
+    status_line.append(f"• Collective Archive: {store.count} memory records loaded\n", style="green")
     if has_custom_model:
-        status_line.append("• Custom Model: Qwen 2.5 0.5B GGUF (Memory Writer) [ACTIVE]\n", style="bold green")
+        status_line.append("• Custom Worker: Qwen 2.5 0.5B GGUF (Memory Writer) [ACTIVE]\n", style="bold green")
     else:
-        status_line.append("• Custom Model: Not loaded (using mock components)\n", style="yellow")
+        status_line.append("• Custom Worker: Not loaded (using mock components)\n", style="yellow")
     status_line.append("Type your task, or /help for available commands.", style="italic white")
 
     panel = Panel(
         title + "\n" + status_line,
-        border_style="cyan",
+        border_style="red",
         padding=(1, 2),
     )
     console.print(panel)
@@ -262,19 +262,19 @@ async def main():
     print_banner(store, has_custom)
 
     # Prompt session with command history
-    history_file = base_dir / ".pyramid_history"
+    history_file = base_dir / ".commune_history"
     session = PromptSession(history=FileHistory(str(history_file)))
 
     while True:
         try:
-            user_input = await session.prompt_async("\npyramid > ")
+            user_input = await session.prompt_async("\ncommune > ")
             user_input = user_input.strip()
             if not user_input:
                 continue
 
             # Command Handling
             if user_input in ["/exit", "exit", "quit", ":q", "q"]:
-                console.print("[cyan]Shutting down Pyramid Engine. Goodbye![/]")
+                console.print("[red]Shutting down Commune Engine. Goodbye, comrade![/]")
                 break
             elif user_input == "/help":
                 console.print(Panel(

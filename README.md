@@ -1,36 +1,42 @@
-# Pyramid
+# Commune AI (Коммуна)
 
-Modular AI orchestration system with staged aggregation.
+> **"От каждого по способностям, каждому по потребностям."**  
+> Кооперативный роевой AI-движок и альтернатива закрытым монолитным LLM.
 
-See [PYRAMID_SPEC.md](PYRAMID_SPEC.md) for the full architectural specification.
+Вместо одного гигантского корпоративного монолита, требующего серверные фермы за миллионы долларов, **Commune** объединяет равноправный коллектив легковесных специализированных моделей (Workers) и системных инструментов под управлением Совета (Router/Scheduler).
 
-## Quick Start
+См. полную архитектурную спецификацию: [COMMUNE_SPEC.md](COMMUNE_SPEC.md).
+
+---
+
+## Быстрый старт
 
 ```bash
-# Activate virtual environment
-source .venv/bin/activate
-
-# Launch Interactive Terminal Interface
+# Запуск интерактивного терминала (venv подхватится автоматически!)
 ./cli.py
 
-# Or run tests
+# Или запуск тестов ядра
 pytest -v
 ```
 
-## Features
+---
 
-- **Engine Core:** Directed Acyclic Graph (DAG) scheduler with topological ordering, timeouts, and parallel execution.
-- **Typed Communication:** Every inter-component message is validated via `Envelope` (JSON-schemas, status, token counts, latency).
-- **Persistent Memory:** Category-partitioned JSON store (`project`, `knowledge`, `session`) with provenance, versioning, conflict detection, and audit changelog.
-- **Custom Fine-tuned GGUF Model:** Includes an in-house trained **Qwen 2.5 0.5B Instruct** running locally on CPU via `llama-cpp-python` as a dedicated **Memory Writer** extracting structured facts in ~2.0s.
-- **Interactive CLI:** Beautiful terminal UI powered by Rich & prompt_toolkit (`/memory`, `/routes`, execution latency breakdown).
+## Архитектура Коммуны
 
-## Interactive Commands in CLI
+1. **Совет (The Council / Router):** Разбирает задачу гражданина и созывает нужных специалистов в граф выполнения (DAG).
+2. **Рабочие (Workers):** 
+   - Локальные легковесные GGUF-модели (наш дообученный `Qwen 2.5 0.5B Memory Writer`, потребляющий всего 380 МБ RAM).
+   - Системные инструменты (парсеры кода, утилиты, тесты).
+3. **Архив (Collective Archive / MemoryStore):** Персистентное независимое хранилище знаний, решений и состояния проекта с полной историей изменений (`changelog.json`).
+4. **Ступенчатая агрегация (Staged Aggregation):** Каждый этап сжимает и очищает контекст перед передачей следующему товарищу.
 
-Inside `./cli.py`:
-- `запомни: <любой факт или правило>` — модель извлечет факт и сохранит в персистентную память.
-- `analyze <код или текст>` — прогон через 3-стадийный пайплайн (`parser` → `analyzer` → `formatter`).
-- `посчитай слова: <текст>` — быстрый запуск легковесного аналитического компонента.
-- `/memory` — просмотр сохраненных фактов и категорий.
-- `/routes` — текущая таблица маршрутизации и зависимостей между стадиями.
-- `/help` — список доступных команд.
+---
+
+## Команды в CLI (`./cli.py`)
+
+- `commune > запомни: <любой факт или решение>` — модель извлечет суть и сохранит в Архив.
+- `commune > analyze <код или текст>` — коллективный анализ кода в 3 стадии.
+- `commune > /memory` — просмотр всего Архива знаний.
+- `commune > /routes` — схема распределения задач Советом.
+- `commune > /help` — справка.
+- `commune > /exit` — выход.
